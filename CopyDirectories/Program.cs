@@ -9,15 +9,22 @@ namespace CopyDirectories
         static void Main(string[] args)
         {
             Console.WriteLine("Kopiowanie plików z Fintemp. Witam :)");
-            Console.WriteLine("UWAGA: Pamiętaj, że ponowne uruchomienie programu spowoduje nadpisanie danych.");
+            Console.Write("Chcesz (ewentualnie) nadpisać pliki? Y/N? : ");
+            string key = Console.ReadLine();
             Console.WriteLine("Aby rozpocząć proszę nacisnąć dowolny przycisk...");
             Console.ReadKey();
+            bool overwrite = false;
+
+            if (key == "Y" || key == "y") { overwrite = true; }
+
             string[] pcs = pcList.load();
             foreach(string PC in pcs)
             {
                 Console.WriteLine("Trwa kopiowanie PC: {0}", PC);
-                DirCopy.Execute(PC);
+                
+                DirCopy.Execute(PC,overwrite);
             }
+
             Console.WriteLine("Koniec! :)");
             Console.ReadKey();
         }

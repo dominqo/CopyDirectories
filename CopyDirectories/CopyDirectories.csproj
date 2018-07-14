@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CopyDir.cs" />
     <Compile Include="DirCopy.cs" />
     <Compile Include="pcList.cs" />
     <Compile Include="Program.cs" />

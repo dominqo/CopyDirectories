@@ -5,16 +5,14 @@ namespace CopyDirectories
 {
     class DirCopy
     {
-        private static void Address(string sourceDirName, string destDirName, bool copySubDirs)
+        private static void Address(string sourceDirName, string destDirName, bool copySubDirs, bool overwrite)
         {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
 
             if (!dir.Exists)
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceDirName);
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();
@@ -28,8 +26,16 @@ namespace CopyDirectories
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, true);
+                try
+                {
+                    string temppath = Path.Combine(destDirName, file.Name);
+                    file.CopyTo(temppath, overwrite);
+                }
+                catch (IOException)
+                {
+                    Console.WriteLine("[{0}] - Plik nie może zostać nadpisany, ponieważ nie wybrałeś tej opcji!", file.Name);
+                }
+                
             }
 
             // If copying subdirectories, copy them and their contents to new location.
@@ -38,14 +44,14 @@ namespace CopyDirectories
                 foreach (DirectoryInfo subdir in dirs)
                 {
                     string temppath = Path.Combine(destDirName, subdir.Name);
-                    Address(subdir.FullName, temppath, copySubDirs);
+                    Address(subdir.FullName, temppath, copySubDirs, overwrite);
                 }
             }
         }
-        public static void Execute(string ProfitCenter)
+        public static void Execute(string ProfitCenter, bool overwrite)
         {
-            const string mainCopyFrom = @"D:\Projekty\playground\lol";
             const string mainCopyTo = @"N:\var\www\html\playground";
+            const string mainCopyFrom = @"D:\Projekty\playground\lol";
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
             DirectoryInfo[] directories = dirMain.GetDirectories();
 
@@ -54,8 +60,8 @@ namespace CopyDirectories
                 if (dir.Name.Contains(ProfitCenter))
                 {
                     Console.WriteLine("Proszę czekać...", dir.FullName);
-                    Address(Path.Combine(dir.FullName, "RECON"), Path.Combine(mainCopyTo, ProfitCenter), true);
-                    Address(Path.Combine(dir.FullName, "SYSTEM_REPORTS"), Path.Combine(mainCopyTo, ProfitCenter), true);
+                    Address(Path.Combine(dir.FullName, "RECON"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
+                    Address(Path.Combine(dir.FullName, "SYSTEM_REPORTS"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
                 }
             }
         }
