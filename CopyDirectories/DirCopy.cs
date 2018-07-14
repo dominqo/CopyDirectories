@@ -5,7 +5,7 @@ namespace CopyDirectories
 {
     class DirCopy
     {
-        public static void address(string sourceDirName, string destDirName, bool copySubDirs)
+        private static void Address(string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -29,7 +29,7 @@ namespace CopyDirectories
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
+                file.CopyTo(temppath, true);
             }
 
             // If copying subdirectories, copy them and their contents to new location.
@@ -38,9 +38,27 @@ namespace CopyDirectories
                 foreach (DirectoryInfo subdir in dirs)
                 {
                     string temppath = Path.Combine(destDirName, subdir.Name);
-                    address(subdir.FullName, temppath, copySubDirs);
+                    Address(subdir.FullName, temppath, copySubDirs);
                 }
             }
         }
+        public static void Execute(string ProfitCenter)
+        {
+            const string mainCopyFrom = @"D:\Projekty\playground\lol";
+            const string mainCopyTo = @"N:\var\www\html\playground";
+            DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
+            DirectoryInfo[] directories = dirMain.GetDirectories();
+
+            foreach (DirectoryInfo dir in directories)
+            {
+                if (dir.Name.Contains(ProfitCenter))
+                {
+                    Console.WriteLine("Proszę czekać...", dir.FullName);
+                    Address(Path.Combine(dir.FullName, "RECON"), Path.Combine(mainCopyTo, ProfitCenter), true);
+                    Address(Path.Combine(dir.FullName, "SYSTEM_REPORTS"), Path.Combine(mainCopyTo, ProfitCenter), true);
+                }
+            }
+        }
+
     }
 }

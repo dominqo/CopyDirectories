@@ -3,11 +3,10 @@ using System.IO;
 
 namespace CopyDirectories
 {
-    static class Szukanie
+    static class pcList
     {
-        public static string[] loadPC()
+        public static string[] load()
         {
-            
             StreamReader file = null;
             try
             {
@@ -16,7 +15,7 @@ namespace CopyDirectories
                 while (file.ReadLine() != null) { a++; }
                 string[] tablica = new string[a];
                 file.DiscardBufferedData();
-                file.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+                file.BaseStream.Seek(0, SeekOrigin.Begin);
                 for (int i = 0; i < a; i++)
                 {
                     tablica[i] = file.ReadLine();

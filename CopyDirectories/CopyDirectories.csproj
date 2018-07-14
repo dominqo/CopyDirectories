@@ -44,9 +44,9 @@
   <ItemGroup>
     <Compile Include="CopyDir.cs" />
     <Compile Include="DirCopy.cs" />
+    <Compile Include="pcList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Szukanie.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
