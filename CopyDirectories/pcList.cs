@@ -5,7 +5,7 @@ namespace CopyDirectories
 {
     static class pcList
     {
-        public static string[] load()
+        private static string[] load()
         {
             StreamReader file = null;
             try
@@ -33,6 +33,23 @@ namespace CopyDirectories
                 if (file != null)
                     file.Dispose();
             }
+        }
+        public static string[] getPC()
+        {
+            string[] tablicaCala = load();
+            int count = tablicaCala.Length;
+            string[] tablicaPC = new string[count - 3];
+            for(int i=0; i<(count-3); i++)
+            {
+                tablicaPC[i] = tablicaCala[i + 3];
+            }
+            return tablicaPC;
+        }
+        public static string getPath()
+        {
+            string[] tablicaCala = load();
+            string path = tablicaCala[1];
+            return path;
         }
     }
 }

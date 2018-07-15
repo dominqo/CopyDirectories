@@ -18,7 +18,7 @@ namespace CopyDirectories
 
             if (key == "Y" || key == "y") { overwrite = true; }
 
-            string[] pcs = pcList.load();
+            string[] pcs = pcList.getPC();
             foreach(string PC in pcs)
             {
                 Console.WriteLine("Trwa kopiowanie PC: {0}", PC);
