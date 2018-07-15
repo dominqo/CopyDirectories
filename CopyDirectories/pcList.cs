@@ -8,7 +8,7 @@ namespace CopyDirectories
         private static string[] load()
         {
             StreamReader file = null;
-            try
+            try 
             {
                 file = new StreamReader("PC.txt");
                 int a = 0;
