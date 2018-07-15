@@ -8,8 +8,9 @@ namespace CopyDirectories
         
         static void Main(string[] args)
         {
-            Console.WriteLine("Kopiowanie plików z Fintemp. Witam :)");
-            Console.Write("Chcesz (ewentualnie) nadpisać pliki? Y/N? : ");
+            Console.WriteLine("Witaj w programie fintempCopy by DHACZEK :)");
+            Console.WriteLine("Wpisz wszystkie swoje PC w pliku PC.txt, który powinien się znajdować w tym samym folderze co ten program.");
+            Console.Write("Chcesz (ewentualnie) nadpisać pliki? Program nadpisze wtedy zasoby w twoim lokalnym folderze. Y/N? : ");
             string key = Console.ReadLine();
             Console.WriteLine("Aby rozpocząć proszę nacisnąć dowolny przycisk...");
             Console.ReadKey();
@@ -21,8 +22,7 @@ namespace CopyDirectories
             foreach(string PC in pcs)
             {
                 Console.WriteLine("Trwa kopiowanie PC: {0}", PC);
-                
-                DirCopy.Execute(PC,overwrite);
+                DirCopy.Execute(PC, overwrite);
             }
 
             Console.WriteLine("Koniec! :)");
