@@ -24,6 +24,7 @@ namespace CopyDirectories
             }
             catch (FileNotFoundException)
             {
+                // TODO: Test try catch
                 Console.WriteLine("Plik PC.txt nie istnieje!");
                 string[] strings = new string[] { "No file present" };
                 return strings;

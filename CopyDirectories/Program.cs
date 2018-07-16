@@ -9,10 +9,11 @@ namespace CopyDirectories
         static void Main(string[] args)
         {
             Console.WriteLine("Witaj w programie fintempCopy by DHACZEK :)");
+            Console.WriteLine("Ustaw ścieżkę do której chcesz kopiować zasoby z fintemp w pliku PC.txt.");
             Console.WriteLine("Wpisz wszystkie swoje PC w pliku PC.txt, który powinien się znajdować w tym samym folderze co ten program.");
-            Console.Write("Chcesz (ewentualnie) nadpisać pliki? Program nadpisze wtedy zasoby w twoim lokalnym folderze. Y/N? : ");
+            Console.Write("Chcesz nadpisać pliki w swoim lokalnym folderze? Y/N? : ");
             string key = Console.ReadLine();
-            Console.WriteLine("Aby rozpocząć proszę nacisnąć dowolny przycisk...");
+            Console.Write("\nAby rozpocząć proszę nacisnąć dowolny przycisk...");
             Console.ReadKey();
             bool overwrite = false;
 
