@@ -54,17 +54,29 @@ namespace CopyDirectories
         {
             List<string> myList = FileReader.load();
             string mainCopyTo = myList.ElementAt(1);
-            const string mainCopyFrom = @"D:\Projekty\playground\lol";
+            const string mainCopyFrom = @"D:\Projekty\xfintemp\2018 File System\GFS_PLANTS";
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
             DirectoryInfo[] directories = dirMain.GetDirectories();
 
+            // TODO: Simplify
             foreach (DirectoryInfo dir in directories)
             {
                 if (dir.Name.Contains(ProfitCenter))
                 {
-                    Console.WriteLine("Proszę czekać...", dir.FullName);
-                   Address(Path.Combine(dir.FullName, "RECON"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
-                   Address(Path.Combine(dir.FullName, "SYSTEM_REPORTS"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
+
+                    DirectoryInfo[] dir2 = dir.GetDirectories();
+                    foreach (DirectoryInfo nextdir in dir2)
+                    {
+                        Console.WriteLine("Kopiuję folder {0}", nextdir.Name);
+                        DirectoryInfo[] dir3 = nextdir.GetDirectories();
+                        foreach (DirectoryInfo nextdirx in dir3)
+                        {
+                            if (nextdirx.Name.Contains("06"))
+                            {
+                                Address(nextdirx.FullName, Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
+                            }
+                        }
+                    }
                 }
             }
         }
