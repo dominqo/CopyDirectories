@@ -50,7 +50,7 @@ namespace CopyDirectories
         }
         public static void Execute(string ProfitCenter, bool overwrite)
         {
-            string mainCopyTo = pcList.getPath();
+            string mainCopyTo = FileReader.getPath();
             const string mainCopyFrom = @"D:\Projekty\playground\lol";
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
             DirectoryInfo[] directories = dirMain.GetDirectories();

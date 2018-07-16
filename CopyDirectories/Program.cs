@@ -15,11 +15,12 @@ namespace CopyDirectories
             string key = Console.ReadLine();
             Console.Write("\nAby rozpocząć proszę nacisnąć dowolny przycisk...");
             Console.ReadKey();
+            Console.WriteLine();
             bool overwrite = false;
 
             if (key == "Y" || key == "y") { overwrite = true; }
 
-            string[] pcs = pcList.getPC();
+            string[] pcs = FileReader.getPC();
             foreach(string PC in pcs)
             {
                 Console.WriteLine("Trwa kopiowanie PC: {0}", PC);

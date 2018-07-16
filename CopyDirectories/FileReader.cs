@@ -3,11 +3,12 @@ using System.IO;
 
 namespace CopyDirectories
 {
-    static class pcList
+    static class FileReader
     {
         private static string[] load()
         {
             StreamReader file = null;
+            
             try 
             {
                 file = new StreamReader("PC.txt");
