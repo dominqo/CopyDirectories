@@ -1,57 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace CopyDirectories
 {
     static class FileReader
     {
-        private static string[] load()
+        public static List<string> load()
         {
+            List<string> profitcList = new List<string>();
             StreamReader file = null;
-            
             try 
             {
                 file = new StreamReader("PC.txt");
-                int a = 0;
-                while (file.ReadLine() != null) { a++; }
-                string[] tablica = new string[a];
-                file.DiscardBufferedData();
-                file.BaseStream.Seek(0, SeekOrigin.Begin);
-                for (int i = 0; i < a; i++)
+                while (!file.EndOfStream)
                 {
-                    tablica[i] = file.ReadLine();
+                    profitcList.Add(file.ReadLine());
                 }
-                return tablica;
             }
             catch (FileNotFoundException)
             {
                 // TODO: Test try catch
                 Console.WriteLine("Plik PC.txt nie istnieje!");
-                string[] strings = new string[] { "No file present" };
-                return strings;
             }
             finally
             {
                 if (file != null)
                     file.Dispose();
             }
-        }
-        public static string[] getPC()
-        {
-            string[] tablicaCala = load();
-            int count = tablicaCala.Length;
-            string[] tablicaPC = new string[count - 3];
-            for(int i=0; i<(count-3); i++)
-            {
-                tablicaPC[i] = tablicaCala[i + 3];
-            }
-            return tablicaPC;
-        }
-        public static string getPath()
-        {
-            string[] tablicaCala = load();
-            string path = tablicaCala[1];
-            return path;
+            return profitcList;
         }
     }
 }

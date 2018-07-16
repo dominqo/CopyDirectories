@@ -1,5 +1,6 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CopyDirectories
 {
@@ -20,8 +21,8 @@ namespace CopyDirectories
 
             if (key == "Y" || key == "y") { overwrite = true; }
 
-            string[] pcs = FileReader.getPC();
-            foreach(string PC in pcs)
+            List<string> PCs = FileReader.load();
+            foreach(string PC in PCs.Skip(3))
             {
                 Console.WriteLine("Trwa kopiowanie PC: {0}", PC);
                 DirCopy.Execute(PC, overwrite);

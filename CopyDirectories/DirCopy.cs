@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CopyDirectories
 {
-    class DirCopy
+    static class DirCopy
     {
         private static void Address(string sourceDirName, string destDirName, bool copySubDirs, bool overwrite)
         {
@@ -50,7 +52,8 @@ namespace CopyDirectories
         }
         public static void Execute(string ProfitCenter, bool overwrite)
         {
-            string mainCopyTo = FileReader.getPath();
+            List<string> myList = FileReader.load();
+            string mainCopyTo = myList.ElementAt(1);
             const string mainCopyFrom = @"D:\Projekty\playground\lol";
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
             DirectoryInfo[] directories = dirMain.GetDirectories();
@@ -60,8 +63,8 @@ namespace CopyDirectories
                 if (dir.Name.Contains(ProfitCenter))
                 {
                     Console.WriteLine("Proszę czekać...", dir.FullName);
-                    Address(Path.Combine(dir.FullName, "RECON"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
-                    Address(Path.Combine(dir.FullName, "SYSTEM_REPORTS"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
+                   Address(Path.Combine(dir.FullName, "RECON"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
+                   Address(Path.Combine(dir.FullName, "SYSTEM_REPORTS"), Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
                 }
             }
         }
