@@ -32,6 +32,7 @@ namespace CopyDirectories
                 {
                     string temppath = Path.Combine(destDirName, file.Name);
                     file.CopyTo(temppath, overwrite);
+                    Console.WriteLine(" -- Kopiowanie {0}", file.Name);
                 }
                 catch (IOException)
                 {
@@ -50,7 +51,7 @@ namespace CopyDirectories
                 }
             }
         }
-        public static void Execute(string ProfitCenter, bool overwrite)
+        public static void Execute(string ProfitCenter, bool overwrite, string miesiac)
         {
             List<string> myList = FileReader.load();
             string mainCopyTo = myList.ElementAt(1);
@@ -59,6 +60,7 @@ namespace CopyDirectories
             DirectoryInfo[] directories = dirMain.GetDirectories();
 
             // TODO: Simplify
+            // dodalbym tutaj generowanie listy folderow, a poznniej przechwytywanie konkretnego wyrazeniem lambda
             foreach (DirectoryInfo dir in directories)
             {
                 if (dir.Name.Contains(ProfitCenter))
@@ -67,11 +69,11 @@ namespace CopyDirectories
                     DirectoryInfo[] dir2 = dir.GetDirectories();
                     foreach (DirectoryInfo nextdir in dir2)
                     {
-                        Console.WriteLine("Kopiuję folder {0}", nextdir.Name);
+                        Console.WriteLine(" - Folder: {0}", nextdir.Name);
                         DirectoryInfo[] dir3 = nextdir.GetDirectories();
                         foreach (DirectoryInfo nextdirx in dir3)
                         {
-                            if (nextdirx.Name.Contains("06"))
+                            if (nextdirx.Name.Contains(miesiac)) // TODO: roznica miedzy 1 a 11, 2 a 12 fix
                             {
                                 Address(nextdirx.FullName, Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
                             }
