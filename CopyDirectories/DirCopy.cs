@@ -51,16 +51,19 @@ namespace CopyDirectories
                 }
             }
         }
-        public static void Execute(string ProfitCenter, bool overwrite, string miesiac)
+        private static string MonthParse(string month)
         {
+            if (month.Length == 1) { return String.Concat("0", month); }
+            else return month;
+        }
+        public static void Execute(string ProfitCenter, bool overwrite, string month)
+        {
+            const string mainCopyFrom = @"D:\Projekty\xfintemp\2018 File System\GFS_PLANTS";
             List<string> myList = FileReader.load();
             string mainCopyTo = myList.ElementAt(1);
-            const string mainCopyFrom = @"D:\Projekty\xfintemp\2018 File System\GFS_PLANTS";
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
             DirectoryInfo[] directories = dirMain.GetDirectories();
 
-            // TODO: Simplify
-            // dodalbym tutaj generowanie listy folderow, a poznniej przechwytywanie konkretnego wyrazeniem lambda
             foreach (DirectoryInfo dir in directories)
             {
                 if (dir.Name.Contains(ProfitCenter))
@@ -73,7 +76,7 @@ namespace CopyDirectories
                         DirectoryInfo[] dir3 = nextdir.GetDirectories();
                         foreach (DirectoryInfo nextdirx in dir3)
                         {
-                            if (nextdirx.Name.Contains(miesiac)) // TODO: roznica miedzy 1 a 11, 2 a 12 fix
+                            if (nextdirx.Name.Contains(MonthParse(month))) 
                             {
                                 Address(nextdirx.FullName, Path.Combine(mainCopyTo, ProfitCenter), true, overwrite);
                             }
