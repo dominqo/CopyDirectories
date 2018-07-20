@@ -1,4 +1,4 @@
-﻿// fintempCopy
+// fintempCopy
 // dodac 2 dyski zmapowane
 // dodac rok variable
 // dodalbym generowanie listy folderow, a poznniej przechwytywanie konkretnego wyrazeniem lambda
@@ -13,6 +13,7 @@ namespace CopyDirectories
     {
         static void Main(string[] args)
         {
+			var watch = System.Diagnostics.Stopwatch.StartNew();
             Intro();
             Console.Write("Chcesz nadpisać pliki w swoim lokalnym folderze? Y/N? : ");
             string key1 = Console.ReadLine();
@@ -48,6 +49,10 @@ namespace CopyDirectories
             Console.WriteLine("*=========================================*");
             Console.WriteLine("| Koniec! Pliki zostały zapisane na dysku.|");
             Console.WriteLine("*=========================================*");
+			watch.Stop();
+			var elapsedMs = watch.ElapsedMilliseconds;
+			double tm = (double)elapsedMs/60000;
+			Console.WriteLine("Time: {0.3} min", tm);
             Console.ReadKey();
         }
         public static void Intro()
