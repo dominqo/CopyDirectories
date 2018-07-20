@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -56,9 +56,20 @@ namespace CopyDirectories
             if (month.Length == 1) { return String.Concat("0", month); }
             else return month;
         }
+		private static string ChoosePath()
+		{
+			string path;
+			string[] files = Directory.GetDirectories(@"Y:\");
+			int ifIsFintemp = Array.IndexOf(files, @"Y:\Fintemp");
+			if(ifIsFintemp >=0){path = @"Y:\Fintemp\2018 File System\GFS_PLANTS";}
+			else {path = @"Y:\CBPRFinance\Fintemp\2018 File System\GFS_PLANTS";}
+			return path;
+		}
+		
         public static void Execute(string ProfitCenter, bool overwrite, string month)
         {
-            const string mainCopyFrom = @"D:\Projekty\xfintemp\2018 File System\GFS_PLANTS";
+			
+            string mainCopyFrom = ChoosePath();
             List<string> myList = FileReader.load();
             string mainCopyTo = myList.ElementAt(1);
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);
