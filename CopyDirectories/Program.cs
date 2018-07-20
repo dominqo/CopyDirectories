@@ -52,7 +52,7 @@ namespace CopyDirectories
 			watch.Stop();
 			var elapsedMs = watch.ElapsedMilliseconds;
 			double tm = (double)elapsedMs/60000;
-			Console.WriteLine("Time: {0.3} min", tm);
+			Console.WriteLine("Time: {0} min", tm);
             Console.ReadKey();
         }
         public static void Intro()
