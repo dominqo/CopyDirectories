@@ -7,6 +7,7 @@ namespace CopyDirectories
 {
     static class DirCopy
     {
+        public static int filesCount;
         private static void Address(string sourceDirName, string destDirName, bool copySubDirs, bool overwrite)
         {
             // Get the subdirectories for the specified directory.
@@ -33,12 +34,12 @@ namespace CopyDirectories
                     string temppath = Path.Combine(destDirName, file.Name);
                     file.CopyTo(temppath, overwrite);
                     Console.WriteLine(" -- Kopiowanie {0}", file.Name);
+                    filesCount++;
                 }
                 catch (IOException)
                 {
                     Console.WriteLine("[{0}] - Plik nie może zostać nadpisany, ponieważ nie wybrałeś tej opcji!", file.Name);
                 }
-                
             }
 
             // If copying subdirectories, copy them and their contents to new location.
@@ -69,7 +70,7 @@ namespace CopyDirectories
         public static void Execute(string ProfitCenter, bool overwrite, string month)
         {
 			
-            string mainCopyFrom = ChoosePath();
+            string mainCopyFrom = @"D:\Projekty\Fintemp\2018 File System\GFS_PLANTS";
             List<string> myList = FileReader.load();
             string mainCopyTo = myList.ElementAt(1);
             DirectoryInfo dirMain = new DirectoryInfo(mainCopyFrom);

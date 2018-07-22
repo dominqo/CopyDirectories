@@ -1,7 +1,6 @@
 // fintempCopy
-// dodac 2 dyski zmapowane
 // dodac rok variable
-// dodalbym generowanie listy folderow, a poznniej przechwytywanie konkretnego wyrazeniem lambda
+// dodalbym generowanie listy folderow, a poznniej przechwytywanie konkretnego wyrazeniem lambda (ewentualnie)
 
 using System;
 using System.Collections.Generic;
@@ -46,13 +45,15 @@ namespace CopyDirectories
                 DirCopy.Execute(PC, overwrite, key2);
             }
 
-            Console.WriteLine("*=========================================*");
-            Console.WriteLine("| Koniec! Pliki zostały zapisane na dysku.|");
-            Console.WriteLine("*=========================================*");
+            Console.WriteLine("*==========================================*");
+            Console.WriteLine("| Koniec! Pliki zostały zapisane na dysku. |");
+            Console.WriteLine("*==========================================*");
 			watch.Stop();
 			var elapsedMs = watch.ElapsedMilliseconds;
-			double tm = (double)elapsedMs/60000;
-			Console.WriteLine("Time: {0} min", tm);
+			double timeMin = (double)elapsedMs/60000;
+            double timeSec = ((double)elapsedMs % 60000)/1000;
+            Console.WriteLine("Czas wykonania: {0:F0}min {1:F0}s", timeMin, timeSec);
+            Console.WriteLine("Łącznie skopiowano plików: {0}", DirCopy.filesCount);
             Console.ReadKey();
         }
         public static void Intro()
